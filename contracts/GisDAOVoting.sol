@@ -189,9 +189,9 @@ contract GisDAOVoting is Ownable{
         @notice Get staker balance from staking contract
         @param _address The desired address to get info
     */
-    function getAddressBalanceFromStaking(address _address) public returns(uint256){
+    function getAddressBalanceFromStaking(address _address) public view returns(uint256){
         require(_address != address(0), "zero address");
-        (bool success, bytes memory result) = stakingContract.call(
+        (bool success, bytes memory result) = stakingContract.staticcall(
             abi.encodeWithSignature("getAddressBalance(address)", _address)
         );
         require(success, string(result));

@@ -141,8 +141,8 @@ contract GisStaking is AccessControl{
         maxStakingTime = _maxStakingTime;
     }
 
-    function isWithdrawableInDAO(address _address) public returns(bool){
-        (bool success, bytes memory result) = daoContract.call(
+    function isWithdrawableInDAO(address _address) public view returns(bool){
+        (bool success, bytes memory result) = daoContract.staticcall(
             abi.encodeWithSignature("hasNotActiveProposal(address)", _address)
         );
         require(success, string(result));
